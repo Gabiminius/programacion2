@@ -3,13 +3,19 @@ import java.util.ArrayList;
 
 public class MainBebida{
     public static void main(String[] args) {
-        Bebida b=new Bebida(4);
-        b.llenar(500);
-        System.out.println(b.getSerie());
-        System.out.println(b.beber(40));
-        System.out.println(b.beber(0));
-        System.out.println(b.beber(460));
-        System.out.println(b.beber(3));
+        Bebida b1 = new Bebida(1);
+        Bebida b2 = new Bebida(2);
+        Bebida b3 = new Bebida(3);
+
+        Deposito deposito = new Deposito();
+        deposito.addBebida(b1);
+        deposito.addBebida(b2);
+        deposito.addBebida(b3);
+
+        System.out.println(deposito.getBebida().getSerie());
+        System.out.println(deposito.getBebida().getSerie());
+        System.out.println(deposito.getBebida().getSerie());
+        System.out.println(deposito.getBebida());
 
 
     }
