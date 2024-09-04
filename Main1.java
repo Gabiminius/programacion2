@@ -1,14 +1,14 @@
 public class Main1 {
     public static void main(String[] args) {
         CuatroOperaciones a= new CuatroOperaciones(3,5);
-        
+
     }
 
 
 }
 class SumaResta{
-    protected float uno;
-    protected float dos;
+    private float uno;
+    private float dos;
     public SumaResta(float uno,float dos){
         this.uno=uno;
         this.dos=dos;
@@ -22,6 +22,12 @@ class SumaResta{
         return uno-dos;
 
     }
+    public float getUno(){
+        return uno;
+    }
+    public float getDos(){
+        return dos;
+    }
 
 }
 class CuatroOperaciones extends SumaResta{
@@ -30,9 +36,9 @@ class CuatroOperaciones extends SumaResta{
 
     }
     public float multiplica(){
-        return uno*dos;
+        return getUno()*getDos();
     }
     public float divide(){
-        return uno/dos;
+        return getUno()/getDos();
     }
 }
