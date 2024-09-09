@@ -1,24 +1,75 @@
-public class Main {
+import java.util.ArrayList;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+    // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+    public class Main {
     public static void main(String[] args) {
-        CreaYPruebaBebida.pruebaVeSerieBebe(1,0001);
+        Expendedor expendedor = new Expendedor(3);
+        Moneda moneda = new Moneda();
+        Bebida bebida1 = expendedor.comprarBebida(moneda, 1);
+
+        System.out.println(bebida1.getSerie());
+        System.out.println(bebida1.beber());
+
 
     }
- 
 }
-class CreaYPruebaBebida {
-    public static void pruebaVeSerieBebe(int que, int serie){
-        Bebida b=null;
-        switch (que){
-            case 1:  b = new Sprite(serie); break;
-            case 2:  b = new Fanta(serie); break;
-            case 3:  b = new Kem(serie); break;
-            case 4:  b = new CocaCola(serie); break;
-            default: return;
+class Deposito {
+    private ArrayList<Bebida> bebidas;
+
+    public Deposito() {
+        bebidas = new ArrayList<>();
+    }
+
+    public void addBebida(Bebida bebida1) {
+        bebidas.add(bebida1);
+    }
+
+    public Bebida getBebida() {
+        if (bebidas.size() > 0) {
+            return bebidas.remove(0);
+        } else {
+            return null;
         }
-        System.out.println(b.getSerie()+": "+b.beber());
     }
 }
-abstract class Bebida{
+    class Expendedor{
+        private Deposito depositoCoca;
+        private Deposito depositoSprite;
+        private int serieCoca = 100;
+        private int serieSprite = 200;
+
+        public Expendedor(int cantidad) {
+            depositoCoca = new Deposito();
+            depositoSprite = new Deposito();
+
+
+            for (int i = 0; i < cantidad; i++) {
+                depositoCoca.addBebida(new CocaCola(serieCoca++));
+                depositoSprite.addBebida(new Sprite(serieSprite++));
+            }
+        }
+
+        public Bebida comprarBebida(Moneda moneda, int tipo) {
+            if (tipo == 1) {
+                return depositoCoca.getBebida();
+            } else if (tipo == 2) {
+                return depositoSprite.getBebida();
+            }
+            return null;
+        }
+
+    }
+    class Moneda {
+    public Moneda(){
+
+    }
+    }
+
+
+
+
+abstract class  Bebida{
     private int serie;
     public Bebida(int serie){
         this.serie=serie;
@@ -27,46 +78,27 @@ abstract class Bebida{
     public int getSerie(){
         return serie;
     }
-    public abstract String beber();
+    public String beber(){
+        return "sabor:";
+    }
 }
 class Sprite extends Bebida {
-    Sprite(int serie){
+    public Sprite(int serie){
         super(serie);
 
     }
     public String beber(){
-        return "sprite";
-    }
-
-}
-class Fanta extends Bebida {
-    Fanta(int serie){
-        super(serie);
-
-    }
-    public String beber(){
-        return "fanta";
-    }
-
-}
-class Kem extends Bebida {
-    Kem(int serie){
-        super(serie);
-
-    }
-    public String beber(){
-        return "kem";
+        return super.beber()+ " sprite";
     }
 
 }
 class CocaCola extends Bebida {
-    CocaCola(int serie){
+    public CocaCola(int serie){
         super(serie);
 
     }
     public String beber(){
-        return "cocacola";
+        return super.beber()+" cocacola";
     }
 
 }
-
