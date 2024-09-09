@@ -41,7 +41,9 @@ abstract class  Bebida{
     public int getSerie(){
         return serie;
     }
-    public abstract String beber();
+    public String beber(){
+               return "sabor:";
+    }
 }
 
 class Deposito {
@@ -69,7 +71,7 @@ class Sprite extends Bebida {
 
     }
     public String beber(){
-        return "sprite";
+        return super.beber()+ " sprite";
     }
 
 }
@@ -79,7 +81,7 @@ class Fanta extends Bebida {
 
     }
     public String beber(){
-        return "fanta";
+        return super.beber()+" fanta";
     }
 
 }
@@ -89,7 +91,7 @@ class Kem extends Bebida {
 
     }
     public String beber(){
-        return "kem";
+        return super.beber()+ " kem";
     }
 
 }
@@ -99,7 +101,7 @@ class CocaCola extends Bebida {
 
     }
     public String beber(){
-        return "cocacola";
+        return super.beber()+" cocacola";
     }
 
 }
