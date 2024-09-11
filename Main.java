@@ -1,94 +1,163 @@
 import java.util.ArrayList;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-    // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-    public class Main {
+public class Main {
     public static void main(String[] args) {
-        Expendedor expendedor = new Expendedor(3);
-        Moneda moneda = new Moneda();
-        Bebida bebida1 = expendedor.comprarBebida(moneda, 1);
-
-        System.out.println(bebida1.getSerie());
-        System.out.println(bebida1.beber());
-
 
     }
 }
-class Deposito {
-    private ArrayList<Bebida> bebidas;
+class Expendedor{
+    private Deposito coca;
+    private Deposito sprite;
+    private DepositoM monVu;
+    public Expendedor(Moneda m,int tipo){
 
-    public Deposito() {
-        bebidas = new ArrayList<>();
+
+    }
+    public comprarBebida(){
+
+
+    }
+    public getVuelto(){
+
     }
 
-    public void addBebida(Bebida bebida1) {
-        bebidas.add(bebida1);
-    }
+}
+class Comprador{
+    private String sonido;
+    private int vuelto;
+    public Comprador(Moneda m,int cualBebida, Expendedor exp){
 
-    public Bebida getBebida() {
-        if (bebidas.size() > 0) {
-            return bebidas.remove(0);
-        } else {
-            return null;
-        }
+    }
+    public cuantoVuelto(){
+
+    }
+    public queBebiste(){
+
     }
 }
-    class Expendedor{
-        private Deposito depositoCoca;
-        private Deposito depositoSprite;
-        private int serieCoca = 100;
-        private int serieSprite = 200;
+    abstract class  Moneda{
+    private int valor;
 
-        public Expendedor(int cantidad) {
-            depositoCoca = new Deposito();
-            depositoSprite = new Deposito();
+    public Moneda(int valor){
 
-
-            for (int i = 0; i < cantidad; i++) {
-                depositoCoca.addBebida(new CocaCola(serieCoca++));
-                depositoSprite.addBebida(new Sprite(serieSprite++));
-            }
-        }
-
-        public Bebida comprarBebida(Moneda moneda, int tipo) {
-            if (tipo == 1) {
-                return depositoCoca.getBebida();
-            } else if (tipo == 2) {
-                return depositoSprite.getBebida();
-            }
-            return null;
-        }
+        this.valor=valor;
 
     }
-    class Moneda {
-    public Moneda(){
+
+    public abstract int getValor();
+
+
+
+
+}
+class Moneda1500 extends Moneda{
+    public Moneda1500(){
+        super(1500);
+
 
     }
+    public int getValor(){
+        return this.getValor();
+
     }
 
+}
+
+class Moneda1000 extends Moneda{
+
+    public Moneda1000(){
+        super(1000);
 
 
+    }
+    public int getValor(){
+        return this.getValor();
 
-abstract class  Bebida{
+    }
+
+}
+class Moneda500 extends Moneda{
+
+    public Moneda500(){
+        super(500);
+
+
+    }
+    public int getValor(){
+        return this.getValor();
+
+    }
+
+}
+class Moneda100 extends Moneda{
+
+    public Moneda100(){
+        super(100);
+
+    }
+    public int getValor(){
+        return this.getValor();
+
+    }
+
+}
+class Bebida{
     private int serie;
     public Bebida(int serie){
         this.serie=serie;
 
     }
+    public String beber(){
+        return "sabor:";
+
+    }
     public int getSerie(){
         return serie;
     }
-    public String beber(){
-        return "sabor:";
+}
+class Deposito{
+    private ArrayList<Bebida> bebidas;
+    public Deposito(){
+        bebidas = new ArrayList<>();
+    }
+    public void addBebida(Bebida bebida){
+        bebidas.add(bebida);
+    }
+    public Bebida getBebida(){
+        if(bebidas.size()>0){
+            return bebidas.remove(0);
+        }
+        else{
+            return null;
+        }
     }
 }
-class Sprite extends Bebida {
-    public Sprite(int serie){
-        super(serie);
+class DepositoM{
+    private ArrayList<Moneda> monedas;
+
+    public DepositoM(){
+        monedas= new ArrayList<>();
 
     }
-    public String beber(){
-        return super.beber()+ " sprite";
+    public void addMoneda(Moneda m) {
+        monedas.add(m);
+    }
+
+    public Moneda getMoneda() {
+        if (monedas.size() > 0) {
+            return monedas.remove(0);
+        } else {
+            return null;
+        }
+
+    }
+
+    public int getTotal() {
+        int total = 0;
+        for (Moneda m : monedas) {
+            total += m.getValor();
+        }
+        return total;
     }
 
 }
@@ -99,6 +168,16 @@ class CocaCola extends Bebida {
     }
     public String beber(){
         return super.beber()+" cocacola";
+    }
+
+}
+class Sprite extends Bebida {
+    public Sprite(int serie){
+        super(serie);
+
+    }
+    public String beber(){
+        return super.beber()+ " sprite";
     }
 
 }
